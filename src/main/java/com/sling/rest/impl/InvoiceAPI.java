@@ -10,6 +10,7 @@ import io.vertx.core.json.JsonObject;
 import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sling.rest.annotations.Validate;
 import com.sling.rest.jaxrs.model.Fund;
 import com.sling.rest.jaxrs.model.Funds;
 import com.sling.rest.jaxrs.model.Invoice;
@@ -33,6 +34,8 @@ public class InvoiceAPI implements InvoicesResource {
 
   private final Messages            messages = Messages.getInstance();
   
+  @Validate
+  @Override
   public void getInvoices(String authorization, String query, String orderBy, Order order, int offset, int limit, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -63,7 +66,8 @@ public class InvoiceAPI implements InvoicesResource {
     });
     
   }
-
+  @Validate
+  @Override
   public void postInvoices(String authorization, String lang, Invoice entity, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
@@ -102,7 +106,8 @@ public class InvoiceAPI implements InvoicesResource {
     }
     
   }
-
+  @Validate
+  @Override
   public void getInvoicesByInvoiceId(String invoiceId, String authorization, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -136,7 +141,8 @@ public class InvoiceAPI implements InvoicesResource {
     }
     
   }
-
+  @Validate
+  @Override
   public void deleteInvoicesByInvoiceId(String invoiceId, String authorization, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -163,7 +169,8 @@ public class InvoiceAPI implements InvoicesResource {
     }
     
   }
-
+  @Validate
+  @Override
   public void putInvoicesByInvoiceId(String invoiceId, String authorization, String lang, Invoice entity,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -190,7 +197,8 @@ public class InvoiceAPI implements InvoicesResource {
     }
     
   }
-
+  @Validate
+  @Override
   public void getInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String query, String orderBy, Order order,
       int offset, int limit, String lang, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -226,7 +234,8 @@ public class InvoiceAPI implements InvoicesResource {
           .getMessage(lang, "10001"))));
     }  
   }
-
+  @Validate
+  @Override
   public void postInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String lang, InvoiceLine entity,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
     
@@ -269,7 +278,8 @@ public class InvoiceAPI implements InvoicesResource {
     
     
   }
-
+  @Validate
+  @Override
   public void getInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -305,13 +315,15 @@ public class InvoiceAPI implements InvoicesResource {
     }*/
     
   }
-
+  @Validate
+  @Override
   public void deleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization,
       String lang, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
     // TODO Auto-generated method stub
 
   }
-
+  @Validate
+  @Override
   public void putInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization, String lang,
       InvoiceLine entity, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
     // TODO Auto-generated method stub

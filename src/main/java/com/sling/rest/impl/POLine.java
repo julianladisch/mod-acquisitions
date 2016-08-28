@@ -13,6 +13,7 @@ import io.vertx.core.Handler;
 
 import javax.ws.rs.core.Response;
 
+import com.sling.rest.annotations.Validate;
 import com.sling.rest.jaxrs.model.PoLine;
 import com.sling.rest.jaxrs.resource.POLinesResource;
 
@@ -25,6 +26,7 @@ public class POLine implements POLinesResource {
   /* (non-Javadoc)
    * @see com.sling.rest.jaxrs.resource.POLinesResource#getPoLines(java.lang.String, java.lang.String, java.lang.String, com.sling.rest.jaxrs.resource.POLinesResource.Order, int, int, java.lang.String, io.vertx.core.Handler, io.vertx.core.Context)
    */
+  @Validate
   @Override
   public void getPoLines(String authorization, String query, String orderBy, Order order, int offset, int limit, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
@@ -35,6 +37,7 @@ public class POLine implements POLinesResource {
   /* (non-Javadoc)
    * @see com.sling.rest.jaxrs.resource.POLinesResource#postPoLines(java.lang.String, java.lang.String, com.sling.rest.jaxrs.model.PoLine, io.vertx.core.Handler, io.vertx.core.Context)
    */
+  @Validate
   @Override
   public void postPoLines(String authorization, String lang, PoLine entity, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
@@ -45,6 +48,7 @@ public class POLine implements POLinesResource {
   /* (non-Javadoc)
    * @see com.sling.rest.jaxrs.resource.POLinesResource#getPoLinesByPoLineId(java.lang.String, java.lang.String, java.lang.String, io.vertx.core.Handler, io.vertx.core.Context)
    */
+  @Validate
   @Override
   public void getPoLinesByPoLineId(String poLineId, String authorization, String lang, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
@@ -55,6 +59,7 @@ public class POLine implements POLinesResource {
   /* (non-Javadoc)
    * @see com.sling.rest.jaxrs.resource.POLinesResource#deletePoLinesByPoLineId(java.lang.String, java.lang.String, java.lang.String, io.vertx.core.Handler, io.vertx.core.Context)
    */
+  @Validate
   @Override
   public void deletePoLinesByPoLineId(String poLineId, String authorization, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
@@ -65,6 +70,7 @@ public class POLine implements POLinesResource {
   /* (non-Javadoc)
    * @see com.sling.rest.jaxrs.resource.POLinesResource#putPoLinesByPoLineId(java.lang.String, java.lang.String, java.lang.String, com.sling.rest.jaxrs.model.PoLine, io.vertx.core.Handler, io.vertx.core.Context)
    */
+  @Validate
   @Override
   public void putPoLinesByPoLineId(String poLineId, String authorization, String lang, PoLine entity,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {

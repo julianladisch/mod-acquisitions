@@ -6,7 +6,9 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
+
 import javax.ws.rs.core.Response;
+
 import com.sling.rest.annotations.Validate;
 import com.sling.rest.jaxrs.model.Fund;
 import com.sling.rest.jaxrs.model.Funds;
@@ -21,6 +23,7 @@ public class FundsAPI implements FundsResource {
   private final Messages            messages = Messages.getInstance();
 
   @Validate
+  @Override
   public void getFunds(String authorization, String query, String orderBy, Order order, int offset, int limit, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
@@ -53,6 +56,7 @@ public class FundsAPI implements FundsResource {
   }
   
   @Validate
+  @Override
   public void postFunds(String authorization, String lang, Fund entity, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
@@ -92,6 +96,7 @@ public class FundsAPI implements FundsResource {
   }
   
   @Validate
+  @Override
   public void getFundsByFundId(String fundId, String authorization, String lang, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
@@ -126,6 +131,7 @@ public class FundsAPI implements FundsResource {
   }
   
   @Validate
+  @Override
   public void deleteFundsByFundId(String fundId, String authorization, String lang, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
@@ -153,6 +159,7 @@ public class FundsAPI implements FundsResource {
   }
 
   @Validate
+  @Override
   public void putFundsByFundId(String fundId, String authorization, String lang, Fund entity,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
