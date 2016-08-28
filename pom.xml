@@ -9,6 +9,7 @@
 		<aspectj.version>1.8.9</aspectj.version>
 		<module_name>acquisitions</module_name>
 		<ramlfiles_path>${basedir}/ramls</ramlfiles_path>
+		<http.port>8081</http.port>
 		<log_path>${basedir}/logs/acquisitions.log</log_path>
 		<gclog_path>${basedir}/logs/gclogs/*.log</gclog_path>
 		<filebeat_log_path>${basedir}/logs/filebeat</filebeat_log_path>
@@ -206,7 +207,7 @@
         <configuration>
           <tasks>
             <replace token= "baseUri: http://github.com/sling-incubator/lsp-apis" 
-            value="baseUri: http://localhost:8081/apis" dir="${basedir}/target/classes/apidocs/raml/acquisitions">                                 
+            value="baseUri: http://localhost:${http.port}/apis" dir="${basedir}/target/classes/apidocs/raml/acquisitions">                                 
               <include name="**/*.raml"/>
             </replace>
             <replace token= "protocols: [ HTTPS ]" 
