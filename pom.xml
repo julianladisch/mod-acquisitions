@@ -8,6 +8,7 @@
 	<properties>
 		<aspectj.version>1.8.9</aspectj.version>
 		<module_name>acquisitions</module_name>
+		<ramlfiles_path>${basedir}/ramls</ramlfiles_path>
 		<log_path>${basedir}/logs/acquisitions.log</log_path>
 		<gclog_path>${basedir}/logs/gclogs/*.log</gclog_path>
 		<filebeat_log_path>${basedir}/logs/filebeat</filebeat_log_path>
@@ -85,6 +86,36 @@
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.5.0</version>
+				<executions>
+					<execution>
+						<id>generate_interfaces</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>java</goal>
+						</goals>
+						<configuration>
+							<mainClass>com.sling.rest.tools.GenerateRunner</mainClass>
+							<!-- <executable>java</executable> -->
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+							<systemProperties>
+								<systemProperty>
+									<key>project.basedir</key>
+									<value>${basedir}</value>
+								</systemProperty>
+								<systemProperty>
+									<key>raml_files</key>
+									<value>${ramlfiles_path}/acquisitions</value>
+								</systemProperty>
+							</systemProperties>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.8</version>
 				<configuration>
@@ -126,6 +157,55 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/apidocs/raml</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${ramlfiles_path}</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+	<!-- replace the baseuri and the protocol in the ramls that are in the apidocs directory so that they can at least be used
+	to check via the html api console on IE -->
+  <plugin>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <executions>
+      <execution>
+        <phase>prepare-package</phase>
+        <configuration>
+          <tasks>
+            <replace token= "baseUri: http://github.com/sling-incubator/lsp-apis" 
+            value="baseUri: http://localhost:8081/apis" dir="${basedir}/target/classes/apidocs/raml/acquisitions">                                 
+              <include name="**/*.raml"/>
+            </replace>
+            <replace token= "protocols: [ HTTPS ]" 
+            value="protocols: [ HTTP ]" dir="${basedir}/target/classes/apidocs/raml/acquisitions">                                 
+              <include name="**/*.raml"/>
+            </replace>
+          </tasks>
+        </configuration>
+        <goals>
+          <goal>run</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
