@@ -73,7 +73,7 @@ public class FundsAPITest {
   }
   
   @Test
-  public void getFunds() throws IOException {
+  public void runTest() throws IOException {
     given().accept(TEXT).
     when().get(funds).
     then().
@@ -101,14 +101,13 @@ public class FundsAPITest {
       body("funds[0].code", equalTo("MEDGRANT")).
     extract().response();
     System.out.println(response.asString());
-  }
-
-  @Test
-  public void getInvoices() {
+    
     given().accept(TEXT).
     when().get(invoices).
     then().
       body("total_records", equalTo(0)).
       body("invoices", empty());
+    
   }
+
 }
