@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
 
 import org.apache.commons.io.IOUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,6 +26,7 @@ import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.empty;
+
 import org.junit.runner.RunWith;
 
 @RunWith(VertxUnitRunner.class)
@@ -108,6 +110,11 @@ public class FundsAPITest {
       body("total_records", equalTo(0)).
       body("invoices", empty());
     
+  }
+  
+  @After
+  public void tearDown(TestContext context) {
+    vertx.close(context.asyncAssertSuccess());
   }
 
 }
