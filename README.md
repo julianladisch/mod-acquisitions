@@ -31,6 +31,7 @@ note that the embedded mongo is started on a dynamic port chosen at embedded mon
 
 #### Querying examples:
 
+```sh
 make sure to include appropriate headers as the runtime framework validates them
 
 Authorization: aaaaa
@@ -44,7 +45,7 @@ http://localhost:8083/apis/invoices
 query with a filter (mongo syntax)
 
 http://localhost:8083/apis/invoices?query={"$and": [ { "total_amount": { "$lt": 111 } }, { "vendor_contact_person.first_name": "joe" } ]}
-
+```
 
 (see online documentation for additional options)
 http://localhost:8083/apidocs/index.html?raml=raml/acquisitions/acquisitions.raml
