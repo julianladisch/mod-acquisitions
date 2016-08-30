@@ -1,4 +1,4 @@
-# acquisitions
+# mod-acquisitions
 Demo acquisitions module exposing some acquisitions apis and objects based on the raml-module-builder framework against a MongoDB
 
 This project is built using the raml-module-builder, using the MongoDB async client to implement some basic acquisition APIs. The project also includes a small demo of the drools functionality. It is highly recommended to read the [raml-module-builder README](https://github.com/folio-org/raml-module-builder/blob/master/README.md)
