@@ -1,4 +1,4 @@
-package com.sling.rest.impl;
+package com.folio.rest.impl;
 
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
@@ -7,8 +7,8 @@ import io.vertx.core.Handler;
 import javax.ws.rs.core.Response;
 
 import com.sling.rest.annotations.Validate;
-import com.sling.rest.jaxrs.model.PoLine;
-import com.sling.rest.jaxrs.resource.POLinesResource;
+import com.folio.rest.jaxrs.model.PoLine;
+import com.folio.rest.jaxrs.resource.POLinesResource;
 
 /**
  * @author shale

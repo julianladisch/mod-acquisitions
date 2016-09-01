@@ -1,4 +1,4 @@
-package com.sling.rest.impl;
+package com.folio.rest.impl;
 
 import java.util.List;
 
@@ -10,13 +10,13 @@ import io.vertx.core.json.JsonObject;
 import javax.ws.rs.core.Response;
 
 import com.sling.rest.annotations.Validate;
-import com.sling.rest.jaxrs.model.Fund;
-import com.sling.rest.jaxrs.model.Funds;
-import com.sling.rest.jaxrs.resource.FundsResource;
+import com.folio.rest.jaxrs.model.Fund;
+import com.folio.rest.jaxrs.model.Funds;
+import com.folio.rest.jaxrs.resource.FundsResource;
+import com.folio.rest.utils.Consts;
 import com.sling.rest.persist.MongoCRUD;
 import com.sling.rest.resource.utils.OutStream;
 import com.sling.rest.tools.Messages;
-import com.sling.rest.utils.Consts;
 
 public class FundsAPI implements FundsResource {
 

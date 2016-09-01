@@ -1,4 +1,4 @@
-package com.sling.rest.impl;
+package com.folio.rest.impl;
 
 import java.util.List;
 
@@ -11,23 +11,23 @@ import javax.ws.rs.core.Response;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sling.rest.annotations.Validate;
-import com.sling.rest.jaxrs.model.Fund;
-import com.sling.rest.jaxrs.model.Funds;
-import com.sling.rest.jaxrs.model.Invoice;
-import com.sling.rest.jaxrs.model.InvoiceLine;
-import com.sling.rest.jaxrs.model.InvoiceLines;
-import com.sling.rest.jaxrs.model.Invoices;
-import com.sling.rest.jaxrs.resource.InvoicesResource;
-import com.sling.rest.jaxrs.resource.FundsResource.DeleteFundsByFundIdResponse;
-import com.sling.rest.jaxrs.resource.FundsResource.GetFundsByFundIdResponse;
-import com.sling.rest.jaxrs.resource.FundsResource.GetFundsResponse;
-import com.sling.rest.jaxrs.resource.FundsResource.PostFundsResponse;
-import com.sling.rest.jaxrs.resource.FundsResource.PutFundsByFundIdResponse;
+import com.folio.rest.jaxrs.model.Fund;
+import com.folio.rest.jaxrs.model.Funds;
+import com.folio.rest.jaxrs.model.Invoice;
+import com.folio.rest.jaxrs.model.InvoiceLine;
+import com.folio.rest.jaxrs.model.InvoiceLines;
+import com.folio.rest.jaxrs.model.Invoices;
+import com.folio.rest.jaxrs.resource.InvoicesResource;
+import com.folio.rest.jaxrs.resource.FundsResource.DeleteFundsByFundIdResponse;
+import com.folio.rest.jaxrs.resource.FundsResource.GetFundsByFundIdResponse;
+import com.folio.rest.jaxrs.resource.FundsResource.GetFundsResponse;
+import com.folio.rest.jaxrs.resource.FundsResource.PostFundsResponse;
+import com.folio.rest.jaxrs.resource.FundsResource.PutFundsByFundIdResponse;
 import com.sling.rest.persist.MongoCRUD;
 import com.sling.rest.resource.utils.OutStream;
 import com.sling.rest.resource.utils.RestUtils;
 import com.sling.rest.tools.Messages;
-import com.sling.rest.utils.Consts;
+import com.folio.rest.utils.Consts;
 
 public class InvoiceAPI implements InvoicesResource {
 
