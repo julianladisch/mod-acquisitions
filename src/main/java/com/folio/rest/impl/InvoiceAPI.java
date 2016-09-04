@@ -197,6 +197,8 @@ public class InvoiceAPI implements InvoicesResource {
     }
     
   }
+  
+  //http://localhost:8083/apis/invoices/57c528509c79114f04cbb1cd/invoice_lines
   @Validate
   @Override
   public void getInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String query, String orderBy, Order order,
@@ -210,7 +212,7 @@ public class InvoiceAPI implements InvoicesResource {
         if(query != null){
           q = new JsonObject(query);          
         }
-        q.put("_id", invoiceId);
+        q.put("invoice_id", invoiceId);
         MongoCRUD.getInstance(vertxContext.owner()).get(
           MongoCRUD.buildJson(InvoiceLine.class.getName(), Consts.INVOICE_LINE_COLLECTION, q),
             reply -> {
@@ -234,16 +236,14 @@ public class InvoiceAPI implements InvoicesResource {
           .getMessage(lang, "10001"))));
     }  
   }
+  
   @Validate
   @Override
   public void postInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String lang, InvoiceLine entity,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
     
     try {
-      System.out.println("sending... postInvoices");
-      JsonObject jObj = RestUtils.createMongoObject(Consts.INVOICE_LINE_COLLECTION, Consts.METHOD_POST, authorization, null, null, null, 0, 0,
-          entity, null);
-
+      System.out.println("sending... postInvoicesByInvoiceIdInvoiceLines");
       vertxContext.runOnContext(v -> {
 
         try {
@@ -274,29 +274,27 @@ public class InvoiceAPI implements InvoicesResource {
       e.printStackTrace();
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesByInvoiceIdInvoiceLinesResponse.withPlainInternalServerError(messages.getMessage(
           lang, "10001"))));
-    }
-    
-    
+    } 
   }
+  
+  //http://localhost:8083/apis/invoices/57c528509c79114f04cbb1cd/invoice_lines/57cc25f2c379a75e1cfa8245
   @Validate
   @Override
   public void getInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
-/*    try {
+    try {
       JsonObject q = new JsonObject();
-      q.put("_id", invoiceId);
-      JsonObject jObj = RestUtils.createMongoObject(Consts.INVOICE_LINE_COLLECTION, Consts.METHOD_GET, authorization, q, orderBy, order, offset, limit, null,
-          invoiceId);
+      q.put("invoice_id", invoiceId);
+      q.put("_id", invoiceLineId);
       System.out.println("sending... getInvoicesByInvoiceIdInvoiceLines");
       vertxContext.runOnContext(v -> {
         MongoCRUD.getInstance(vertxContext.owner()).get(
-            jObj,
+          MongoCRUD.buildJson(InvoiceLine.class.getName(), Consts.INVOICE_LINE_COLLECTION, q),
             reply -> {
               try {
                 InvoiceLines lines = new InvoiceLines();
-                List<InvoiceLine> invoiceLine = mapper.readValue(reply.result().toString(),
-                    mapper.getTypeFactory().constructCollectionType(List.class, InvoiceLine.class));
+                List<InvoiceLine> invoiceLine = (List<InvoiceLine>)reply.result();;
                 lines.setInvoiceLines(invoiceLine);
                 lines.setTotalRecords(invoiceLine.size());
                 asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(GetInvoicesByInvoiceIdInvoiceLinesResponse.withJsonOK(lines)));
@@ -312,22 +310,82 @@ public class InvoiceAPI implements InvoicesResource {
       e.printStackTrace();
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(GetInvoicesByInvoiceIdInvoiceLinesResponse.withPlainInternalServerError(messages
           .getMessage(lang, "10001"))));
-    }*/
+    }
     
   }
   @Validate
   @Override
   public void deleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization,
       String lang, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
-    // TODO Auto-generated method stub
 
+    try {
+      JsonObject q = new JsonObject();
+      q.put("invoice_id", invoiceId);
+      q.put("_id", invoiceLineId);
+      System.out.println("sending... deleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId");
+      vertxContext.runOnContext(v -> {
+        MongoCRUD.getInstance(vertxContext.owner()).delete(Consts.INVOICE_LINE_COLLECTION, q, 
+            reply -> {
+              try {
+                if(reply.succeeded()){
+                  asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(
+                    DeleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse.withNoContent()));
+                }
+                else{
+                  asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(DeleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse
+                    .withPlainInternalServerError(messages.getMessage(lang, "10001")))); 
+                }                
+              } catch (Exception e) {
+                e.printStackTrace();
+                asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(DeleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse
+                    .withPlainInternalServerError(messages.getMessage(lang, "10001"))));
+              }
+            });
+      });
+    } catch (Exception e) {
+      e.printStackTrace();
+      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(DeleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse
+        .withPlainInternalServerError(messages.getMessage(lang, "10001"))));
+    }
   }
+  
+  
   @Validate
   @Override
   public void putInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization, String lang,
       InvoiceLine entity, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
-    // TODO Auto-generated method stub
 
+    try {
+      JsonObject q = new JsonObject();
+      q.put("invoice_id", invoiceId);
+      q.put("_id", invoiceLineId);
+      System.out.println("sending... putInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId");
+      vertxContext.runOnContext(v -> {
+        MongoCRUD.getInstance(vertxContext.owner()).update(Consts.INVOICE_LINE_COLLECTION, entity, 
+          q, reply -> {
+              try {
+                if(reply.succeeded()){
+                  asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(
+                    PutInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse.withNoContent()));
+                }
+                else{
+                  asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PutInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse
+                    .withPlainInternalServerError(messages.getMessage(lang, "10001")))); 
+                }                
+              } catch (Exception e) {
+                e.printStackTrace();
+                asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PutInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse
+                    .withPlainInternalServerError(messages.getMessage(lang, "10001"))));
+              }
+            });
+      });
+    } catch (Exception e) {
+      e.printStackTrace();
+      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PutInvoicesByInvoiceIdInvoiceLinesByInvoiceLineIdResponse
+        .withPlainInternalServerError(messages.getMessage(lang, "10001"))));
+    }
+    
+    
   }
 
 }
