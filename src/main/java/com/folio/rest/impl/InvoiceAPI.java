@@ -47,7 +47,6 @@ public class InvoiceAPI implements InvoicesResource {
             reply -> {
               try {
                 Invoices invoices = new Invoices();
-                // this is wasteful!!!
                 List<Invoice> invoiceObj = (List<Invoice>)reply.result();
                 invoices.setInvoices(invoiceObj);
                 invoices.setTotalRecords(invoiceObj.size());
@@ -82,7 +81,6 @@ public class InvoiceAPI implements InvoicesResource {
                     try {
                       Invoice p = new Invoice();
                       p = entity;
-                      //p.setPatronId(reply.result());
                       OutStream stream = new OutStream();
                       stream.setData(p);
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesResponse.withJsonCreated(reply.result(),
@@ -194,16 +192,19 @@ public class InvoiceAPI implements InvoicesResource {
       e.printStackTrace();
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PutInvoicesByInvoiceIdResponse.withPlainInternalServerError(messages
           .getMessage(lang, "10001"))));
-    }
-    
+    }    
   }
   
-  //http://localhost:8083/apis/invoices/57c528509c79114f04cbb1cd/invoice_lines
+
   @Validate
   @Override
   public void getInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String query, String orderBy, Order order,
       int offset, int limit, String lang, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
+    /**
+     * http://HOST:PORT/apis/invoices/{invoiceId}/invoice_lines
+     */
+    
     try {
 
       System.out.println("sending... getInvoicesByInvoiceIdInvoiceLines");
@@ -242,6 +243,10 @@ public class InvoiceAPI implements InvoicesResource {
   public void postInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String lang, InvoiceLine entity,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
     
+    /**
+     * http://HOST:PORT/apis/invoices/{invoiceId}/invoice_lines
+     */
+    
     try {
       System.out.println("sending... postInvoicesByInvoiceIdInvoiceLines");
       vertxContext.runOnContext(v -> {
@@ -277,12 +282,15 @@ public class InvoiceAPI implements InvoicesResource {
     } 
   }
   
-  //http://localhost:8083/apis/invoices/57c528509c79114f04cbb1cd/invoice_lines/57cc25f2c379a75e1cfa8245
   @Validate
   @Override
   public void getInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization, String lang,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
+    /**
+     * http://HOST:PORT/apis/invoices/{invoiceId}/invoice_lines/{invoiceLineId}
+     */
+    
     try {
       JsonObject q = new JsonObject();
       q.put("invoice_id", invoiceId);
@@ -318,6 +326,11 @@ public class InvoiceAPI implements InvoicesResource {
   public void deleteInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization,
       String lang, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
+    
+    /**
+     * http://HOST:PORT/apis/invoices/{invoiceId}/invoice_lines/{invoiceLineId}
+     */
+    
     try {
       JsonObject q = new JsonObject();
       q.put("invoice_id", invoiceId);
@@ -355,6 +368,10 @@ public class InvoiceAPI implements InvoicesResource {
   public void putInvoicesByInvoiceIdInvoiceLinesByInvoiceLineId(String invoiceLineId, String invoiceId, String authorization, String lang,
       InvoiceLine entity, Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
 
+    /**
+     * http://HOST:PORT/apis/invoices/{invoiceId}/invoice_lines/{invoiceLineId}
+     */
+    
     try {
       JsonObject q = new JsonObject();
       q.put("invoice_id", invoiceId);

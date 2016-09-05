@@ -37,7 +37,8 @@ public class FundsAPITest {
   private static String funds = "/apis/funds";
   /** invoices path */
   private static String invoices = "/apis/invoices";
-
+  /** poline path */
+  private static String poLines = "/apis/po_lines";
 
   private static void startEmbeddedMongo() throws Exception {
     MongoCRUD.setIsEmbedded(true);
@@ -76,12 +77,15 @@ public class FundsAPITest {
   
   @Test
   public void runTest() throws IOException {
+    
+    //get funds before inserting
     given().accept(TEXT).
     when().get(funds).
     then().
       body("total_records", equalTo(0)).
       body("funds", empty());
     
+    //insert fund
     Response response =
     given().
       body(getFile("fund1.json")).
@@ -95,6 +99,7 @@ public class FundsAPITest {
       response();
     System.out.println(response.asString());
 
+    //check that fund was inserted with get
     response =
     given().accept(TEXT).
     when().get(funds).
@@ -104,12 +109,37 @@ public class FundsAPITest {
     extract().response();
     System.out.println(response.asString());
     
+    //get invoice test
     given().accept(TEXT).
     when().get(invoices).
     then().
       body("total_records", equalTo(0)).
       body("invoices", empty());
     
+    //insert poline
+    Response response2 =
+    given().
+      body(getFile("poline.json")).
+      contentType(JSON).
+      accept("text/plain").
+    when().
+      post(poLines).
+    then().
+      statusCode(201).
+    extract().
+      response();
+    System.out.println(response2.asString());
+    
+    //check that the poline was inserted
+    response2 =
+    given().accept(TEXT).
+    when().get(poLines).
+    then().
+      body("total_records", equalTo(1)).
+      body("po_lines[0].po_number", equalTo("0987654321")).
+    extract().response();
+    System.out.println(response2.asString());
+
   }
   
   @After
