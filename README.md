@@ -16,6 +16,7 @@ APIs Implemented:
 
     Funds CRUD
     Invoices CRUD
+    PO_lines CRUD
 
 Objects / Schemas:
 
@@ -43,6 +44,12 @@ Or via dockerfile
 note that the embedded mongo is started on a dynamic port chosen at embedded mongo start up - refer to the log ("created embedded mongo config on port 54851")
 
 
+
+#### (see online documentation for additional options - application should be running for documentation to be visible)
+
+http://localhost:8083/apidocs/index.html?raml=raml/acquisitions/acquisitions.raml
+
+
 #### Querying examples:
 
 ```sh
@@ -61,9 +68,6 @@ query with a filter (mongo syntax)
 http://localhost:8083/apis/invoices?query={"$and": [ { "total_amount": { "$lt": 111 } }, { "vendor_contact_person.first_name": "joe" } ]}
 ```
 
-#### (see online documentation for additional options)
-
-http://localhost:8083/apidocs/index.html?raml=raml/acquisitions/acquisitions.raml
 
 #### Post example:
 
