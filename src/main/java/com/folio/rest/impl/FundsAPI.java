@@ -6,17 +6,15 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-
 import javax.ws.rs.core.Response;
-
-import com.sling.rest.annotations.Validate;
+import com.folio.rest.annotations.Validate;
 import com.folio.rest.jaxrs.model.Fund;
 import com.folio.rest.jaxrs.model.Funds;
 import com.folio.rest.jaxrs.resource.FundsResource;
 import com.folio.rest.utils.Consts;
-import com.sling.rest.persist.MongoCRUD;
-import com.sling.rest.resource.utils.OutStream;
-import com.sling.rest.tools.Messages;
+import com.folio.rest.persist.MongoCRUD;
+import com.folio.rest.tools.utils.OutStream;
+import com.folio.rest.tools.Messages;
 
 public class FundsAPI implements FundsResource {
 

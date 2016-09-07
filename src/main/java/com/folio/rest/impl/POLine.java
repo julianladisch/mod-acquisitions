@@ -1,44 +1,18 @@
 package com.folio.rest.impl;
 
 import java.util.List;
-
-
-
-
-
-
-
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
-
-
-
-
 import io.vertx.core.json.JsonObject;
-
 import javax.ws.rs.core.Response;
-
-
-
-
-
-
-
-import com.sling.rest.annotations.Validate;
-import com.sling.rest.persist.MongoCRUD;
-import com.sling.rest.resource.utils.OutStream;
-import com.sling.rest.tools.Messages;
-import com.folio.rest.jaxrs.model.Invoice;
-import com.folio.rest.jaxrs.model.Invoices;
+import com.folio.rest.annotations.Validate;
+import com.folio.rest.persist.MongoCRUD;
+import com.folio.rest.tools.utils.OutStream;
+import com.folio.rest.tools.Messages;
 import com.folio.rest.jaxrs.model.PoLine;
 import com.folio.rest.jaxrs.model.PoLines;
 import com.folio.rest.jaxrs.resource.POLinesResource;
-import com.folio.rest.jaxrs.resource.InvoicesResource.DeleteInvoicesByInvoiceIdResponse;
-import com.folio.rest.jaxrs.resource.InvoicesResource.GetInvoicesByInvoiceIdResponse;
-import com.folio.rest.jaxrs.resource.InvoicesResource.GetInvoicesResponse;
-import com.folio.rest.jaxrs.resource.InvoicesResource.PostInvoicesResponse;
-import com.folio.rest.jaxrs.resource.InvoicesResource.PutInvoicesByInvoiceIdResponse;
 import com.folio.rest.utils.Consts;
 
 

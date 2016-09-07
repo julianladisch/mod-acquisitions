@@ -15,9 +15,9 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.config.EncoderConfig;
 import com.jayway.restassured.response.Response;
-import com.sling.rest.RestVerticle;
-import com.sling.rest.persist.MongoCRUD;
-import com.sling.rest.resource.utils.NetworkUtils;
+import com.folio.rest.RestVerticle;
+import com.folio.rest.persist.MongoCRUD;
+import com.folio.rest.tools.utils.NetworkUtils;
 
 import static com.jayway.restassured.http.ContentType.JSON;
 import static com.jayway.restassured.http.ContentType.TEXT;
