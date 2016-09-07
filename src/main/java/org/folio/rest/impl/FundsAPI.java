@@ -1,4 +1,4 @@
-package com.folio.rest.impl;
+package org.folio.rest.impl;
 
 import java.util.List;
 
@@ -7,14 +7,14 @@ import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 import javax.ws.rs.core.Response;
-import com.folio.rest.annotations.Validate;
-import com.folio.rest.jaxrs.model.Fund;
-import com.folio.rest.jaxrs.model.Funds;
-import com.folio.rest.jaxrs.resource.FundsResource;
-import com.folio.rest.utils.Consts;
-import com.folio.rest.persist.MongoCRUD;
-import com.folio.rest.tools.utils.OutStream;
-import com.folio.rest.tools.Messages;
+import org.folio.rest.annotations.Validate;
+import org.folio.rest.jaxrs.model.Fund;
+import org.folio.rest.jaxrs.model.Funds;
+import org.folio.rest.jaxrs.resource.FundsResource;
+import org.folio.rest.utils.Consts;
+import org.folio.rest.persist.MongoCRUD;
+import org.folio.rest.tools.utils.OutStream;
+import org.folio.rest.tools.Messages;
 
 public class FundsAPI implements FundsResource {
 

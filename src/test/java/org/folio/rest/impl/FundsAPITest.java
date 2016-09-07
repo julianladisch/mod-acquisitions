@@ -1,4 +1,4 @@
-package com.folio.rest.impl;
+package org.folio.rest.impl;
 
 import java.io.IOException;
 
@@ -15,9 +15,9 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.builder.RequestSpecBuilder;
 import com.jayway.restassured.config.EncoderConfig;
 import com.jayway.restassured.response.Response;
-import com.folio.rest.RestVerticle;
-import com.folio.rest.persist.MongoCRUD;
-import com.folio.rest.tools.utils.NetworkUtils;
+import org.folio.rest.RestVerticle;
+import org.folio.rest.persist.MongoCRUD;
+import org.folio.rest.tools.utils.NetworkUtils;
 
 import static com.jayway.restassured.http.ContentType.JSON;
 import static com.jayway.restassured.http.ContentType.TEXT;
