@@ -7,7 +7,7 @@
   "financial_sys_code": "asswwe",
   "licensor": false,
   "governmental": false,
-  "link": null,
+  "link": "http://www.ybp.com/",
   "liable_for_vat": false,
   "material_supplier": true,
   "access_provider": false,
@@ -15,7 +15,7 @@
     "address": [
       {
         "line1": "208 West Chicago St.",
-        "line2": null,
+        "line2": "",
         "city": "Brooklyn",
         "country": "US",
         "preferred": true,
@@ -30,7 +30,7 @@
     ],
     "email": [
       {
-        "description": null,
+        "description": "",
         "preferred": true,
         "email_address": "reply@ybp.com",
         "email_type": [
@@ -77,7 +77,7 @@
       "code": "YBP",
       "description": "The YBP Inc.",
       "status": "ACTIVE",
-      "note": null,
+      "note": "",
       "discount_percent": 0,
       "subscription_interval": 90,
       "library": [
