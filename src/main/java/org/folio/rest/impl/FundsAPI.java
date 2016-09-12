@@ -14,7 +14,7 @@ import org.folio.rest.jaxrs.resource.FundsResource;
 import org.folio.rest.utils.Consts;
 import org.folio.rest.persist.MongoCRUD;
 import org.folio.rest.tools.utils.OutStream;
-import org.folio.rest.tools.Messages;
+import org.folio.rest.tools.messages.Messages;
 
 public class FundsAPI implements FundsResource {
 

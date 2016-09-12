@@ -15,7 +15,7 @@ import org.folio.rest.jaxrs.model.Invoices;
 import org.folio.rest.jaxrs.resource.InvoicesResource;
 import org.folio.rest.persist.MongoCRUD;
 import org.folio.rest.tools.utils.OutStream;
-import org.folio.rest.tools.Messages;
+import org.folio.rest.tools.messages.Messages;
 import org.folio.rest.utils.Consts;
 
 public class InvoiceAPI implements InvoicesResource {
