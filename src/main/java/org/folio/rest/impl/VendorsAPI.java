@@ -32,7 +32,7 @@ public class VendorsAPI implements VendorsResource {
   private String err(String lang) {
     return messages.getMessage(lang, "10001");
   }
-  
+
   /**
    * Return the 10008 error message.
    * @param lang  - language code for the language the error message should have
@@ -41,16 +41,16 @@ public class VendorsAPI implements VendorsResource {
   private String notFound(String lang) {
     return messages.getMessage(lang, "10008");
   }
-  
+
   private void futureGetVendorsOK(Handler<AsyncResult<Response>> async, Vendors vendors) {
-    async.handle(succeededFuture(GetVendorsResponse.withJsonOK(vendors))); 
+    async.handle(succeededFuture(GetVendorsResponse.withJsonOK(vendors)));
   }
-  
+
   private void futureGetVendorsError(Exception e, Handler<AsyncResult<Response>> async, String lang) {
     e.printStackTrace();
     async.handle(succeededFuture(GetVendorsResponse.withPlainInternalServerError(err(lang))));
   }
-  
+
   @Validate
   @Override
   public void getVendors(String authorization, String query, String orderBy,
@@ -87,20 +87,20 @@ public class VendorsAPI implements VendorsResource {
     if (id == null) {
       id = vendor.getId();
     }
-    async.handle(succeededFuture(PostVendorsResponse.withJsonCreated("vendors/" + id, stream))); 
+    async.handle(succeededFuture(PostVendorsResponse.withJsonCreated("vendors/" + id, stream)));
   }
-  
+
   private void futurePostVendorsError(Exception e, Handler<AsyncResult<Response>> async, String lang) {
     e.printStackTrace();
     async.handle(succeededFuture(PostVendorsResponse.withPlainInternalServerError(err(lang))));
   }
-  
+
   @Validate
   @Override
   public void postVendors(String authorization, String lang, Vendor_ vendor,
       Handler<AsyncResult<Response>> async, Context vertxContext)
       throws Exception {
-    
+
     try {
       vertxContext.runOnContext(v -> {
         try {
@@ -123,9 +123,9 @@ public class VendorsAPI implements VendorsResource {
   }
 
   private void futureGetVendorByIdOK(Handler<AsyncResult<Response>> async, Vendor_ vendor) {
-    async.handle(succeededFuture(GetVendorsByVendorIdResponse.withJsonOK(vendor))); 
+    async.handle(succeededFuture(GetVendorsByVendorIdResponse.withJsonOK(vendor)));
   }
-  
+
   private void futureGetVendorByIdNotFound(Handler<AsyncResult<Response>> async, String lang) {
     async.handle(succeededFuture(GetVendorsByVendorIdResponse.withPlainNotFound(notFound(lang))));
   }
@@ -134,7 +134,7 @@ public class VendorsAPI implements VendorsResource {
     e.printStackTrace();
     async.handle(succeededFuture(GetVendorsByVendorIdResponse.withPlainInternalServerError(err(lang))));
   }
-  
+
   @Validate
   @Override
   public void getVendorsByVendorId(String vendorId, String authorization,
@@ -170,9 +170,9 @@ public class VendorsAPI implements VendorsResource {
   }
 
   private void futureDeleteVendorOK(Handler<AsyncResult<Response>> async) {
-    async.handle(succeededFuture(DeleteVendorsByVendorIdResponse.withNoContent())); 
+    async.handle(succeededFuture(DeleteVendorsByVendorIdResponse.withNoContent()));
   }
-  
+
   @Validate
   @Override
   public void deleteVendorsByVendorId(String vendorId, String authorization,
@@ -200,9 +200,9 @@ public class VendorsAPI implements VendorsResource {
   }
 
   private void futurePutVendorByIdOK(Handler<AsyncResult<Response>> async) {
-    async.handle(succeededFuture(PutVendorsByVendorIdResponse.withNoContent())); 
+    async.handle(succeededFuture(PutVendorsByVendorIdResponse.withNoContent()));
   }
-  
+
   @Validate
   @Override
   public void putVendorsByVendorId(String vendorId, String authorization,
@@ -224,7 +224,7 @@ public class VendorsAPI implements VendorsResource {
       );
     } catch (Exception e) {
       futurePutVendorsByIdError(e, async, lang);
-    }   
+    }
   }
 
 }
