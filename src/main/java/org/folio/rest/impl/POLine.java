@@ -1,11 +1,14 @@
 package org.folio.rest.impl;
 
 import java.util.List;
+
+import javax.ws.rs.core.Response;
+
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
-import javax.ws.rs.core.Response;
+
 import org.folio.rest.annotations.Validate;
 import org.folio.rest.persist.MongoCRUD;
 import org.folio.rest.tools.utils.OutStream;
@@ -14,7 +17,6 @@ import org.folio.rest.jaxrs.model.PoLine;
 import org.folio.rest.jaxrs.model.PoLines;
 import org.folio.rest.jaxrs.resource.POLinesResource;
 import org.folio.rest.utils.Consts;
-
 
 public class POLine implements POLinesResource {
 
@@ -73,12 +75,11 @@ public class POLine implements POLinesResource {
               .save(Consts.POLINE_COLLECTION, entity,
                   reply -> {
                     try {
-                      PoLine p = new PoLine();
-                      p = entity;
+                      entity.setId(reply.result());
                       OutStream stream = new OutStream();
-                      stream.setData(p);
-                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostPoLinesResponse.withJsonCreated(reply.result(),
-                          stream)));
+                      stream.setData(entity);
+                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostPoLinesResponse.withJsonCreated(
+                          "po_lines/" + reply.result(), stream)));
                     } catch (Exception e) {
                       e.printStackTrace();
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostPoLinesResponse
