@@ -259,7 +259,7 @@ public class APITest {
     response.then().body("po_number", is("0987654321"));
 
     String json = getFile(jsonFile);
-    json = json.replaceFirst("1234567890", "5");
+    json = json.replaceFirst("0987654321", "5");
     response = put(id, json);
 
     response = get1(id);
@@ -273,7 +273,7 @@ public class APITest {
     String predefinedId = "11223344556677889900";
     response = post(getFile(jsonFile), predefinedId);
     response = get1(predefinedId);
-    response.then().body("po_lines[0].po_number", is("1234567890"));
+    response.then().body("po_lines[0].po_number", is("0987654321"));
   }
 
   @Test
