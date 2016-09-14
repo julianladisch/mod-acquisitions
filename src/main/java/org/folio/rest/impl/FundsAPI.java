@@ -6,7 +6,9 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
+
 import javax.ws.rs.core.Response;
+
 import org.folio.rest.annotations.Validate;
 import org.folio.rest.jaxrs.model.Fund;
 import org.folio.rest.jaxrs.model.Funds;
@@ -55,7 +57,7 @@ public class FundsAPI implements FundsResource {
   
   @Validate
   @Override
-  public void postFunds(String authorization, String lang, Fund entity, Handler<AsyncResult<Response>> asyncResultHandler,
+  public void postFunds(String authorization, String lang, Fund fund, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
     try {
@@ -64,16 +66,19 @@ public class FundsAPI implements FundsResource {
 
         try {
           MongoCRUD.getInstance(vertxContext.owner())
-              .save(Consts.FUNDS_COLLECTION, entity,
+              .save(Consts.FUNDS_COLLECTION, fund,
                   reply -> {
                     try {
-                      Fund p = new Fund();
-                      p = entity;
-                      //p.setPatronId(reply.result());
+                      String id = reply.result();
+                      if (id == null) {
+                        id = fund.getId();
+                      } else {
+                        fund.setId(id);
+                      }
                       OutStream stream = new OutStream();
-                      stream.setData(p);
-                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostFundsResponse.withJsonCreated(reply.result(),
-                          stream)));
+                      stream.setData(fund);
+                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostFundsResponse.withJsonCreated(
+                          "funds/" + id, stream)));
                     } catch (Exception e) {
                       e.printStackTrace();
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostFundsResponse

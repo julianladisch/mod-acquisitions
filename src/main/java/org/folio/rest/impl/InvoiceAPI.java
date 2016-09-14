@@ -6,7 +6,9 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Context;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
+
 import javax.ws.rs.core.Response;
+
 import org.folio.rest.annotations.Validate;
 import org.folio.rest.jaxrs.model.Invoice;
 import org.folio.rest.jaxrs.model.InvoiceLine;
@@ -56,7 +58,7 @@ public class InvoiceAPI implements InvoicesResource {
   }
   @Validate
   @Override
-  public void postInvoices(String authorization, String lang, Invoice entity, Handler<AsyncResult<Response>> asyncResultHandler,
+  public void postInvoices(String authorization, String lang, Invoice invoice, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
     try {
@@ -65,15 +67,19 @@ public class InvoiceAPI implements InvoicesResource {
 
         try {
           MongoCRUD.getInstance(vertxContext.owner())
-              .save(Consts.INVOICE_COLLECTION, entity,
+              .save(Consts.INVOICE_COLLECTION, invoice,
                   reply -> {
                     try {
-                      Invoice p = new Invoice();
-                      p = entity;
+                      String id = reply.result();
+                      if (id == null) {
+                        id = invoice.getId();
+                      } else {
+                        invoice.setId(id);
+                      }
                       OutStream stream = new OutStream();
-                      stream.setData(p);
-                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesResponse.withJsonCreated(reply.result(),
-                          stream)));
+                      stream.setData(invoice);
+                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesResponse.withJsonCreated(
+                          "invoices/" + id, stream)));
                     } catch (Exception e) {
                       e.printStackTrace();
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesResponse
@@ -229,7 +235,8 @@ public class InvoiceAPI implements InvoicesResource {
   
   @Validate
   @Override
-  public void postInvoicesByInvoiceIdInvoiceLines(String invoiceId, String authorization, String lang, InvoiceLine entity,
+  public void postInvoicesByInvoiceIdInvoiceLines(
+      String invoiceId, String authorization, String lang, InvoiceLine invoiceLine,
       Handler<AsyncResult<Response>> asyncResultHandler, Context vertxContext) throws Exception {
     
     /**
@@ -242,16 +249,20 @@ public class InvoiceAPI implements InvoicesResource {
 
         try {
           MongoCRUD.getInstance(vertxContext.owner())
-              .save(Consts.INVOICE_LINE_COLLECTION, entity,
+              .save(Consts.INVOICE_LINE_COLLECTION, invoiceLine,
                   reply -> {
                     try {
-                      InvoiceLine p = new InvoiceLine();
-                      p = entity;
-                      p.setInvoiceId(invoiceId);
+                      String invoiceLineId = reply.result();
+                      if (invoiceLineId == null) {
+                        invoiceLineId = invoiceLine.getId();
+                      } else {
+                        invoiceLine.setId(invoiceLineId);
+                      }
+                      invoiceLine.setInvoiceId(invoiceId);
                       OutStream stream = new OutStream();
-                      stream.setData(p);
-                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesByInvoiceIdInvoiceLinesResponse.withJsonCreated(reply.result(),
-                          stream)));
+                      stream.setData(invoiceLine);
+                      asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesByInvoiceIdInvoiceLinesResponse.withJsonCreated(
+                          "invoice_lines/" + invoiceLineId, stream)));
                     } catch (Exception e) {
                       e.printStackTrace();
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesByInvoiceIdInvoiceLinesResponse
