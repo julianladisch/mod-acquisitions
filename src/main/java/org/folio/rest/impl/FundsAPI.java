@@ -70,11 +70,7 @@ public class FundsAPI implements FundsResource {
                   reply -> {
                     try {
                       String id = reply.result();
-                      if (id == null) {
-                        id = fund.getId();
-                      } else {
-                        fund.setId(id);
-                      }
+                      fund.setId(id);
                       OutStream stream = new OutStream();
                       stream.setData(fund);
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostFundsResponse.withJsonCreated(

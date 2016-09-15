@@ -82,11 +82,7 @@ public class VendorsAPI implements VendorsResource {
 
   private void futurePostVendorsCreated(Handler<AsyncResult<Response>> async, String result, Vendor_ vendor) {
     String id = result;
-    if (id == null) {
-      id = vendor.getId();
-    } else {
-      vendor.setId(id);
-    }
+    vendor.setId(id);
     OutStream stream = new OutStream();
     stream.setData(vendor);
     async.handle(succeededFuture(PostVendorsResponse.withJsonCreated("vendors/" + id, stream)));

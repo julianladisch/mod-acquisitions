@@ -71,11 +71,7 @@ public class InvoiceAPI implements InvoicesResource {
                   reply -> {
                     try {
                       String id = reply.result();
-                      if (id == null) {
-                        id = invoice.getId();
-                      } else {
-                        invoice.setId(id);
-                      }
+                      invoice.setId(id);
                       OutStream stream = new OutStream();
                       stream.setData(invoice);
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostInvoicesResponse.withJsonCreated(
@@ -253,11 +249,7 @@ public class InvoiceAPI implements InvoicesResource {
                   reply -> {
                     try {
                       String invoiceLineId = reply.result();
-                      if (invoiceLineId == null) {
-                        invoiceLineId = invoiceLine.getId();
-                      } else {
-                        invoiceLine.setId(invoiceLineId);
-                      }
+                      invoiceLine.setId(invoiceLineId);
                       invoiceLine.setInvoiceId(invoiceId);
                       OutStream stream = new OutStream();
                       stream.setData(invoiceLine);
