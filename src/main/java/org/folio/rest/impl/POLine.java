@@ -59,7 +59,7 @@ public class POLine implements POLinesResource {
 
   @Validate
   @Override
-  public void postPoLines(String authorization, String lang, PoLine entity, Handler<AsyncResult<Response>> asyncResultHandler,
+  public void postPoLines(String authorization, String lang, PoLine poLine, Handler<AsyncResult<Response>> asyncResultHandler,
       Context vertxContext) throws Exception {
 
     /**
@@ -72,14 +72,15 @@ public class POLine implements POLinesResource {
 
         try {
           MongoCRUD.getInstance(vertxContext.owner())
-              .save(Consts.POLINE_COLLECTION, entity,
+              .save(Consts.POLINE_COLLECTION, poLine,
                   reply -> {
                     try {
-                      entity.setId(reply.result());
+                      String id = reply.result();
+                      poLine.setId(id);
                       OutStream stream = new OutStream();
-                      stream.setData(entity);
+                      stream.setData(poLine);
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostPoLinesResponse.withJsonCreated(
-                          "po_lines/" + reply.result(), stream)));
+                          "po_lines/" + id, stream)));
                     } catch (Exception e) {
                       e.printStackTrace();
                       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostPoLinesResponse
