@@ -30,7 +30,7 @@ public class POLine implements POLinesResource {
     /**
      * http://HOST:PORT/apis/po_lines
      */
-    
+
     System.out.println("sending... getPoLines");
     vertxContext.runOnContext(v -> {
       try {
@@ -65,7 +65,7 @@ public class POLine implements POLinesResource {
     /**
      * http://HOST:PORT/apis/po_lines
      */
-    
+
     try {
       System.out.println("sending... postPoLines");
       vertxContext.runOnContext(v -> {
@@ -98,8 +98,8 @@ public class POLine implements POLinesResource {
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PostPoLinesResponse.withPlainInternalServerError(messages.getMessage(
           lang, "10001"))));
     }
-    
-    
+
+
   }
 
 
@@ -136,7 +136,7 @@ public class POLine implements POLinesResource {
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(GetPoLinesByPoLineIdResponse.withPlainInternalServerError(messages
           .getMessage(lang, "10001"))));
     }
-    
+
   }
 
 
@@ -166,7 +166,7 @@ public class POLine implements POLinesResource {
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(DeletePoLinesByPoLineIdResponse.withPlainInternalServerError(messages
           .getMessage(lang, "10001"))));
     }
-    
+
   }
 
 
@@ -195,8 +195,8 @@ public class POLine implements POLinesResource {
       e.printStackTrace();
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PutPoLinesByPoLineIdResponse.withPlainInternalServerError(messages
           .getMessage(lang, "10001"))));
-    }   
-    
+    }
+
   }
 
 }

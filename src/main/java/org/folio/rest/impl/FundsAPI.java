@@ -52,9 +52,9 @@ public class FundsAPI implements FundsResource {
             lang, "10001"))));
       }
     });
-    
+
   }
-  
+
   @Validate
   @Override
   public void postFunds(String authorization, String lang, Fund fund, Handler<AsyncResult<Response>> asyncResultHandler,
@@ -93,7 +93,7 @@ public class FundsAPI implements FundsResource {
           lang, "10001"))));
     }
   }
-  
+
   @Validate
   @Override
   public void getFundsByFundId(String fundId, String authorization, String lang, Handler<AsyncResult<Response>> asyncResultHandler,
@@ -128,7 +128,7 @@ public class FundsAPI implements FundsResource {
           .getMessage(lang, "10001"))));
     }
   }
-  
+
   @Validate
   @Override
   public void deleteFundsByFundId(String fundId, String authorization, String lang, Handler<AsyncResult<Response>> asyncResultHandler,
@@ -183,7 +183,7 @@ public class FundsAPI implements FundsResource {
       asyncResultHandler.handle(io.vertx.core.Future.succeededFuture(PutFundsByFundIdResponse.withPlainInternalServerError(messages
           .getMessage(lang, "10001"))));
     }
-    
+
   }
 
 }
